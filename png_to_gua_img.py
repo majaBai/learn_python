@@ -2,7 +2,7 @@ from turtle import width
 from PIL import Image
 import numpy as np
 
-I = Image.open('./plant_fruit_apple_a_alb.png') 
+I = Image.open('./normal4.png') 
 print(I)
 print(I.size)
 # I.show()    
@@ -10,14 +10,16 @@ print(I.size)
 I_array = np.array(I)
 # I_array 长度为 32， 每个元素是长度 64 的子数组，子数组的元素是长度为 4 的数组，表示一个像素的 rgba 值
 # print(I_array.shape) => (32, 64, 4)
-# print(len(I_array))
-# print(len(I_array[0]), I_array[0])
+print(len(I_array))
+print(len(I_array[0]), I_array[0])
 # 处理像素的 rgba
 def agba_int(ar):
     r = int(ar[0])
     g = int(ar[1])
     b = int(ar[2])
-    a = int(ar[3])
+    a = 255
+    if(len(ar) == 4):
+        a = int(ar[3])
     return (r << 24) + (g << 16) + (b << 8) + a
 
 pixels = ''
@@ -47,6 +49,6 @@ content += f'{height}' + '\n'
 content += pixels
 
 # 写入 apple.guaimage 文件
-with open("apple.guaimage","w+") as file:
+with open("normal4.guaimage","w+") as file:
     file.write(content)
 
